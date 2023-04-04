@@ -1,5 +1,10 @@
 import React from 'react';
 
 export const Cast = () => {
-  return <div>Cast</div>;
+  console.log('object');
+  return (
+    <div>
+      <h2>HOOPOOLLLLLL</h2>Cast
+    </div>
+  );
 };

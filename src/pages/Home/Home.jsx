@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 import { getResponseTrending } from 'utils/api';
+import { Container } from './Home.styled';
 
 export const Home = () => {
   const [movies, setMovies] = useState(null);
@@ -20,9 +22,14 @@ export const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       <Toaster />
-      {movies && movies.map(movie => <h2 key={movie.id}>{movie.title}</h2>)}
-    </div>
+      {movies &&
+        movies.map(movie => (
+          <Link to={`movies/${movie.id}`} key={movie.id}>
+            {movie.title}
+          </Link>
+        ))}
+    </Container>
   );
 };
