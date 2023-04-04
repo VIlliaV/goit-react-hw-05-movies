@@ -7,12 +7,12 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const { poster_path } = movie;
-  // const [pending, setPending] = useState(true);
+  const [pending, setPending] = useState(true);
 
-  const pending = useRef(true);
+  // const pending = useRef(true);
   const firstRender = useRef(true);
 
-  console.log('first', movie.id, pending.current, movieId);
+  console.log('first', movie.id, pending, movieId);
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -28,8 +28,8 @@ export const MovieDetails = () => {
         })
         .finally(() => {
           console.log('finished');
-          pending.current = false;
-          // setPending(false);
+          // pending.current = false;
+          setPending(false);
         });
     }
     console.log('return');
@@ -38,15 +38,12 @@ export const MovieDetails = () => {
 
   return (
     <>
-      {pending.current ? (
-        <>
-          <p>load</p>
-          <Toaster />
-        </>
+      {pending ? (
+        <p>load</p>
       ) : (
         movie.id && (
           <div>
-            {console.log('RENDER', movie.id, pending.current, movieId)}
+            {console.log('RENDER', movie.id, pending, movieId)}
             <button />
             <div>
               <img
@@ -67,6 +64,7 @@ export const MovieDetails = () => {
           </div>
         )
       )}
+      <Toaster />
     </>
   );
 };
