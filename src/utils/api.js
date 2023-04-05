@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const END_POINT = 'https://api.themoviedb.org/3/';
+const END_POINT_IMG = 'https://image.tmdb.org/t/p/w500';
 const API_KEY = 'ab2980764464f0ed10df4f090768c3c1';
 const TRENDING_CATEGORIES = 'movie';
 const TRENDING_PERIOD = 'day';
@@ -19,6 +20,9 @@ export function getResponseDetails(id, options = '') {
   return axios(`${END_POINT}movie/${id}${options}?api_key=${API_KEY}`);
 }
 
+export function getImage(link) {
+  return axios(`${END_POINT_IMG}${link}`);
+}
 // adult
 // :
 // false

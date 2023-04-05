@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Cast = () => {
   console.log('object');
   return (
