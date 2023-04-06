@@ -34,6 +34,7 @@ export const Movies = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setQuery(e.target.searchWord.value.trim().toLowerCase());
+    e.target.searchWord.value = '';
   };
 
   return (
