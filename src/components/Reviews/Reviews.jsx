@@ -1,5 +1,57 @@
+import { useEffect, useRef, useState } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 
+import { Loader } from 'components/Loader/Loader';
+
+import { getResponseDetails } from 'utils/api';
+import { Container } from './Reviews.styled';
+import { Response } from 'components/Response/Response';
 
 export const Reviews = () => {
-  return <div>Reviews</div>;
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
+  const [pending, setPending] = useState(true);
+
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      getResponseDetails(movieId, '/reviews')
+        .then(response => {
+          if (!response.data.results)
+            throw new Error('Sorry but something wrong, we cant load reviews');
+          if (response.data.results.length) setReviews(response.data.results);
+        })
+        .catch(error => toast.error(`Sorry, we can get a reviews: ${error}`))
+        .finally(setPending(false));
+    }
+    return;
+  }, [movieId]);
+
+  return (
+    <Container>
+      {console.log('pending:', pending, 'movieId', movieId, 'reviews', reviews)}
+      {pending ? (
+        <Loader />
+      ) : (
+        <ul>
+          {reviews.length ? (
+            reviews.map(response => {
+              const { id } = response;
+              return (
+                <li key={id}>
+                  <Response response={response} />
+                </li>
+              );
+            })
+          ) : (
+            <p>We don't have any reviews for this movie.</p>
+          )}
+        </ul>
+      )}
+      <Toaster />
+    </Container>
+  );
 };

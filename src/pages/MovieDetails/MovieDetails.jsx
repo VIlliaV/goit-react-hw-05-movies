@@ -4,7 +4,7 @@ import { Link, Outlet, useParams } from 'react-router-dom';
 
 import { Loader } from 'components/Loader/Loader';
 import { getResponseDetails, getImage } from 'utils/api';
-import noImg from '../../images/noimage.png';
+import noimage500x750 from '../../images/noimage500x750.png';
 
 import { Container } from './MovieDetails.styled';
 
@@ -21,24 +21,29 @@ export const MovieDetails = () => {
   const { poster_path, original_title, vote_average, overview, genres } = movie;
 
   useEffect(() => {
-    if (poster_path)
+    if (poster_path) {
       getImage(poster_path)
         .then(() => {
           setImg(`https://image.tmdb.org/t/p/w500${poster_path}`);
         })
         .catch(error => {
-          setImg(noImg);
+          setImg(noimage500x750);
           toast.error(`Sorry we can get a pictures: ${error.message}`);
         })
         .finally(() => {
           isImg.current = true;
         });
+    } else if (original_title) {
+      setImg(noimage500x750);
+      isImg.current = true;
+    }
 
     if (firstRender.current) {
       firstRender.current = false;
 
       getResponseDetails(movieId)
         .then(response => {
+          if (!response.data) throw new Error('Sorry but something wrong ');
           setMovie(response.data);
         })
         .catch(error => {
@@ -50,17 +55,27 @@ export const MovieDetails = () => {
     }
 
     return;
-  }, [movieId, poster_path]);
+  }, [original_title, movieId, poster_path]);
 
   return (
     <Container>
-      {console.log('RENDER')}
+      {/* {console.log(
+        'RENDER',
+        'id:',
+        movie.id,
+        'pending:',
+        pending,
+        'Link id:',
+        movieId,
+        'img:',
+        img
+      )} */}
+
       {pending ? (
         <Loader />
       ) : (
         movie.id && (
           <div>
-            {/* {console.log('RENDER', movie.id, pending, movieId, img, isImg)} */}
             <button type="button">back</button>
             <div className="movie_head">
               <div className="movie_head_img">
@@ -78,7 +93,7 @@ export const MovieDetails = () => {
                 <p>{overview}</p>
                 <h3>Genres</h3>
                 <ul>
-                  {genres.map(genre => (
+                  {genres?.map(genre => (
                     <li key={genre.id}>{genre.name}</li>
                   ))}
                 </ul>
