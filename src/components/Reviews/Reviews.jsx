@@ -6,7 +6,6 @@ import { Loader } from 'components/Loader/Loader';
 import { Response } from 'components/Response/Response';
 
 import { getResponseDetails } from 'utils/api';
-import { Container } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -31,7 +30,7 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <Container>
+    <div>
       {pending ? (
         <Loader />
       ) : (
@@ -51,7 +50,7 @@ const Reviews = () => {
         </ul>
       )}
       <Toaster />
-    </Container>
+    </div>
   );
 };
 
