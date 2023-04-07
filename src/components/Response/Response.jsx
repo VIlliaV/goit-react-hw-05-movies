@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const Response = ({ response }) => {
   const { author, content } = response;
 
@@ -7,4 +9,11 @@ export const Response = ({ response }) => {
       <p>{content}</p>
     </>
   );
+};
+
+Response.propTypes = {
+  actor: PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  }),
 };

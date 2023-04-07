@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { getImage } from 'utils/api';
 import { Loader } from 'components/Loader/Loader';
@@ -37,4 +38,12 @@ export const Actor = ({ actor }) => {
       <p>{character}</p>
     </>
   );
+};
+
+Actor.propTypes = {
+  actor: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    profile_path: PropTypes.string,
+    character: PropTypes.string.isRequired,
+  }),
 };
