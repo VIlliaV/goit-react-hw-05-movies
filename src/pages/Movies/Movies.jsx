@@ -7,8 +7,8 @@ import { Loader } from 'components/Loader/Loader';
 
 export const Movies = () => {
   const location = useLocation();
-
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [movies, setMovies] = useState([]);
   const [pending, setPending] = useState(false);
 

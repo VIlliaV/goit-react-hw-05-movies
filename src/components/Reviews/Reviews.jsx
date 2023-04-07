@@ -3,10 +3,10 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 import { Loader } from 'components/Loader/Loader';
+import { Response } from 'components/Response/Response';
 
 import { getResponseDetails } from 'utils/api';
 import { Container } from './Reviews.styled';
-import { Response } from 'components/Response/Response';
 
 const Reviews = () => {
   const { movieId } = useParams();
