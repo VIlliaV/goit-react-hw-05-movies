@@ -32,14 +32,19 @@ export const Home = () => {
   return (
     <Container>
       <Toaster />
+      <h1>Trending today</h1>
       {movies.map(movie => (
-        <Link
-          to={`movies/${movie.id}`}
-          state={{ from: location }}
-          key={movie.id}
-        >
-          {movie.title}
-        </Link>
+        <>
+          <Link
+            className="link"
+            to={`movies/${movie.id}`}
+            state={{ from: location }}
+            key={movie.id}
+          >
+            <span></span>
+            {movie.title}
+          </Link>
+        </>
       ))}
     </Container>
   );

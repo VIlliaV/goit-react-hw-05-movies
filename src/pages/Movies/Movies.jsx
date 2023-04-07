@@ -4,6 +4,7 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import { getResponseSearch } from 'utils/api';
 import { Loader } from 'components/Loader/Loader';
+import { Container } from './Movies.styled';
 
 export const Movies = () => {
   const location = useLocation();
@@ -42,7 +43,7 @@ export const Movies = () => {
   };
 
   return (
-    <>
+    <Container>
       <div className="searchbar">
         <form className="SearchForm" onSubmit={handleSubmit}>
           <input
@@ -65,13 +66,17 @@ export const Movies = () => {
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${movie.id}`} state={{ from: location }}>
+              <Link
+                className="link"
+                to={`${movie.id}`}
+                state={{ from: location }}
+              >
                 {movie.title}
               </Link>
             </li>
           ))}
         </ul>
       )}
-    </>
+    </Container>
   );
 };
