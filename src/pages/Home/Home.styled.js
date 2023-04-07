@@ -8,22 +8,32 @@ export const Container = styled.div`
   & h1 {
     margin-bottom: 10px;
   }
-  & .link {
+
+  & .list {
+    display: flex;
+
+    align-items: center;
     padding-left: 25px;
     margin-bottom: 5px;
-    color: var(--primary);
 
-    &:active {
-      color: var(--second);
+    & span {
+      display: block;
+      width: 10px;
+      height: 5px;
+      background-color: var(--second);
+      border-radius: 50%;
     }
-    &:visited {
-      color: var(--second);
+    & .link {
+      padding: 5px;
+
+      color: var(--primary);
+
+      &:active {
+        color: var(--second);
+      }
+      &:visited {
+        color: var(--second);
+      }
     }
-  }
-  & span {
-    display: inline;
-    width: 10px;
-    height: 10px;
-    background-color: var(--second);
   }
 `;

@@ -65,7 +65,8 @@ export const Movies = () => {
       ) : (
         <ul>
           {movies.map(movie => (
-            <li key={movie.id}>
+            <li key={movie.id} className="list">
+              <span></span>
               <Link
                 className="link"
                 to={`${movie.id}`}

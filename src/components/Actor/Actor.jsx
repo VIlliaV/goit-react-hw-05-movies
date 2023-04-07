@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getImage } from 'utils/api';
 import { Loader } from 'components/Loader/Loader';
 import noimage500x750 from '../../images/noimage500x750.png';
+import { Container } from './Actor.styled';
 
 export const Actor = ({ actor }) => {
   const [img, setImg] = useState(null);
@@ -32,11 +33,11 @@ export const Actor = ({ actor }) => {
   }, [profile_path]);
 
   return (
-    <>
+    <Container>
       <h3>{name}</h3>
       {isImg.current ? <img src={img} alt={name} width="100" /> : <Loader />}
       <p>{character}</p>
-    </>
+    </Container>
   );
 };
 

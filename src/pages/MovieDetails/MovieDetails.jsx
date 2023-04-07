@@ -66,7 +66,9 @@ export const MovieDetails = () => {
       ) : (
         movie.id && (
           <div>
-            <Link to={backToPage}>BACK</Link>
+            <Link className="link" to={backToPage}>
+              Go back
+            </Link>
             <div className="movie_head">
               <div className="movie_head_img">
                 {isImg.current ? (
@@ -84,14 +86,29 @@ export const MovieDetails = () => {
                 <h3>Genres</h3>
                 <ul>
                   {genres?.map(genre => (
-                    <li key={genre.id}>{genre.name}</li>
+                    <li key={genre.id}>{genre.name},</li>
                   ))}
                 </ul>
               </div>
             </div>
             <h4>Additional information</h4>
-            <Link to="cast">Cast</Link>
-            <Link to="reviews">Reviews</Link>
+            <div className="movie_additional">
+              <Link
+                className="link_additional"
+                to="cast"
+                state={{ ...location.state }}
+              >
+                Cast
+              </Link>
+              <Link
+                className="link_additional"
+                to="reviews"
+                state={{ ...location.state }}
+              >
+                Reviews
+              </Link>
+            </div>
+
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
