@@ -13,7 +13,6 @@ export const Container = styled.div`
   }
 
   .SearchForm-button {
-    /* display: inline-block; */
     padding: 5px;
     margin: 10px;
     font-size: 12px;
@@ -30,7 +29,6 @@ export const Container = styled.div`
   }
 
   .SearchForm-input {
-    /* display: inline-block; */
     width: 200px;
     font: inherit;
     font-size: 20px;
