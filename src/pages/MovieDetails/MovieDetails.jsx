@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import { Loader } from 'components/Loader/Loader';
 import { getResponseDetails, getImage } from 'utils/api';
@@ -10,6 +10,7 @@ import { Container } from './MovieDetails.styled';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
 
   const [movie, setMovie] = useState({});
   const [pending, setPending] = useState(true);
@@ -18,6 +19,7 @@ export const MovieDetails = () => {
   const firstRender = useRef(true);
   const isImg = useRef(false);
 
+  const backToPage = location.state?.from ?? '/';
   const { poster_path, original_title, vote_average, overview, genres } = movie;
 
   useEffect(() => {
@@ -59,24 +61,12 @@ export const MovieDetails = () => {
 
   return (
     <Container>
-      {/* {console.log(
-        'RENDER',
-        'id:',
-        movie.id,
-        'pending:',
-        pending,
-        'Link id:',
-        movieId,
-        'img:',
-        img
-      )} */}
-
       {pending ? (
         <Loader />
       ) : (
         movie.id && (
           <div>
-            <button type="button">back</button>
+            <Link to={backToPage}>BACK</Link>
             <div className="movie_head">
               <div className="movie_head_img">
                 {isImg.current ? (
@@ -102,7 +92,9 @@ export const MovieDetails = () => {
             <h4>Additional information</h4>
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </div>
         )
       )}

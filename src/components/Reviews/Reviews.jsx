@@ -8,7 +8,7 @@ import { getResponseDetails } from 'utils/api';
 import { Container } from './Reviews.styled';
 import { Response } from 'components/Response/Response';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [pending, setPending] = useState(true);
@@ -32,7 +32,6 @@ export const Reviews = () => {
 
   return (
     <Container>
-      {console.log('pending:', pending, 'movieId', movieId, 'reviews', reviews)}
       {pending ? (
         <Loader />
       ) : (
@@ -55,3 +54,5 @@ export const Reviews = () => {
     </Container>
   );
 };
+
+export default Reviews;

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { getResponseTrending } from 'utils/api';
 import { Container } from './Home.styled';
 
 export const Home = () => {
+  const location = useLocation();
+
   const [movies, setMovies] = useState([]);
 
   const firstRender = useRef(true);
@@ -31,7 +33,11 @@ export const Home = () => {
     <Container>
       <Toaster />
       {movies.map(movie => (
-        <Link to={`movies/${movie.id}`} key={movie.id}>
+        <Link
+          to={`movies/${movie.id}`}
+          state={{ from: location }}
+          key={movie.id}
+        >
           {movie.title}
         </Link>
       ))}

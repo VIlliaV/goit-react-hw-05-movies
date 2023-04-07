@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Toaster, toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 
 import { Actor } from 'components/Actor/Actor';
 import { Loader } from 'components/Loader/Loader';
@@ -8,8 +8,9 @@ import { Loader } from 'components/Loader/Loader';
 import { getResponseDetails } from 'utils/api';
 import { Container } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
+
   const [cast, setCast] = useState([]);
   const [pending, setPending] = useState(true);
 
@@ -32,7 +33,6 @@ export const Cast = () => {
 
   return (
     <Container>
-      {/* {console.log('pending:', pending, 'movieId', movieId, 'cast', cast)} */}
       {pending ? (
         <Loader />
       ) : (
@@ -51,3 +51,5 @@ export const Cast = () => {
     </Container>
   );
 };
+
+export default Cast;
