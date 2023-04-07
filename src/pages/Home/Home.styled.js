@@ -15,6 +15,13 @@ export const Container = styled.div`
     align-items: center;
     padding-left: 25px;
     margin-bottom: 5px;
+    & :hover {
+      color: var(--second);
+      padding: 5px;
+      background-color: var(--button);
+      border: 1px solid var(--second);
+      border-radius: 5px;
+    }
 
     & span {
       display: block;

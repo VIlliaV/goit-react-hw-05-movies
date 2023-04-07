@@ -9,15 +9,23 @@ export const Container = styled.div`
   border-bottom: 1px solid var(--primary);
   box-shadow: 1px 1px 1px var(--second);
   & .list {
+    padding-left: 15px;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+  }
+  & li {
   }
 `;
 
 export const NavStyle = styled(NavLink)`
   color: var(--primary);
+
   &.active {
     color: var(--second);
+    padding: 10px;
+    background-color: var(--button);
+    border: 1px solid var(--second);
+    border-radius: 5px;
   }
 `;
