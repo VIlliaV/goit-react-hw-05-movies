@@ -37,14 +37,18 @@ const Cast = () => {
         <Loader />
       ) : (
         <ul className="actors">
-          {cast?.map(actor => {
-            const { cast_id } = actor;
-            return (
-              <li key={cast_id}>
-                <Actor actor={actor} />
-              </li>
-            );
-          })}
+          {cast.length ? (
+            cast?.map(actor => {
+              const { cast_id } = actor;
+              return (
+                <li key={cast_id}>
+                  <Actor actor={actor} />
+                </li>
+              );
+            })
+          ) : (
+            <p>No Cast</p>
+          )}
         </ul>
       )}
       <Toaster />
